@@ -1,0 +1,205 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Platos",
+        "description": "Documentación de la API para gestionar platos",
+        "contact": {
+            "email": "tu-email@example.com"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/platos": {
+            "get": {
+                "tags": [
+                    "Platos"
+                ],
+                "summary": "Obtener todos los platos con opción de filtrado por precio",
+                "operationId": "096c35965ed6661078e0fb871bed0277",
+                "parameters": [
+                    {
+                        "name": "min_precio",
+                        "in": "query",
+                        "description": "Filtrar por precio mínimo",
+                        "required": false,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "max_precio",
+                        "in": "query",
+                        "description": "Filtrar por precio máximo",
+                        "required": false,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de platos obtenida exitosamente"
+                    },
+                    "500": {
+                        "description": "Error en el servidor"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Platos"
+                ],
+                "summary": "Crear un nuevo plato",
+                "operationId": "094ed5ca17e1f159eb55fd6627827f9c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "precio",
+                                    "foto"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Pizza"
+                                    },
+                                    "precio": {
+                                        "type": "number",
+                                        "example": 10.99
+                                    },
+                                    "foto": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Plato creado con éxito"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/api/platos/{id}": {
+            "get": {
+                "tags": [
+                    "Platos"
+                ],
+                "summary": "Obtener un plato por ID",
+                "operationId": "ea81d943db49f6f96df71e61b8e203dc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del plato",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Plato encontrado"
+                    },
+                    "404": {
+                        "description": "Plato no encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Platos"
+                ],
+                "summary": "Actualizar un plato",
+                "operationId": "12b23e8f7ebbd3a4b62be98f3979bb48",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del plato",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "precio": {
+                                        "type": "number"
+                                    },
+                                    "foto": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Plato actualizado con éxito"
+                    },
+                    "404": {
+                        "description": "Plato no encontrado"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Platos"
+                ],
+                "summary": "Eliminar un plato",
+                "operationId": "55dff111765dbe0c9ad9cd5df487f4f9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del plato",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Plato eliminado"
+                    },
+                    "404": {
+                        "description": "Plato no encontrado"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Platos",
+            "description": "Platos"
+        }
+    ]
+}
