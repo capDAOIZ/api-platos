@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: api-platos
+    env: docker
+    repo: https://github.com/capDAOIZ/api-platos
+    region: frankfurt
+    branch: main
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    plan: free
